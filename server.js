@@ -24,7 +24,7 @@ app.post('/upload', upload.any(), async (req, res) => {
     const path = `${crypto.randomBytes(5).toString('hex')}.${type}`;
     fs.writeFile(`${rootdir}/i/${path}`, req.files[0].buffer, (err) => {
         if (err)
-            return res.status(400).send('Internal error occurred while writing the image data');
+            return res.status(500).send('Internal error occurred while writing the image data');
         
         return res.status(200).send(JSON.stringify({ path }))
     })
