@@ -40,7 +40,7 @@ imgsub.get('/*', (req, res) => {
 
 app.use(sdomain('i', imgsub))
 app.use(NotFound)
-app.listen(port, console.log('Server Online!'));
+app.listen(port, () => console.log('Server Online!'));
 
 /* Custom Functions */
 function GetKeys() {
