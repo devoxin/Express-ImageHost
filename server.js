@@ -18,15 +18,15 @@ const port    = 80;
 /* Server Routes */
 app.post('/upload', upload.any(), async (req, res) => {
     if (!req.headers['authorization'] || !getKeys().includes(req.headers['authorization']))
-        return res.status(401).send('Unauthorized');
+        return res.status(401).json({ error: 'Unauthorized' });
 
     const type = req.files[0].originalname.split('.')[1] || 'png';
     const path = `${crypto.randomBytes(5).toString('hex')}.${type}`;
     fs.writeFile(`${rootdir}/i/${path}`, req.files[0].buffer, (err) => {
         if (err)
-            return res.status(500).send('Internal error occurred while writing the image data');
+            return res.status(500).json({ error: 'Internal error occurred while writing the image data' });
         
-        return res.status(200).send(JSON.stringify({ path }))
+        return res.status(200).json({ path });
     })
 });
 
@@ -50,5 +50,5 @@ function getKeys() {
 }
 
 function notFound(req, res, next) {
-    res.status(404).sendFile(`${rootdir}/error.html`);
+    res.status(404).json({ error: 'endpoint/file not found' });
 }
