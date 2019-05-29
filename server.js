@@ -36,14 +36,14 @@ app.post('/upload', upload.any(), async (req, res) => {
     return res.status(400).json({ error: 'Unsupported file format' });
   }
 
-  const fileName = `${crypto.randomBytes(5).toString('hex')  }.${  originalFormat}`;
+  const fileName = `${crypto.randomBytes(5).toString('hex')}.${originalFormat}`;
 
   writeFile(`${currDir}/i/${fileName}`, req.files[0].buffer, (err) => {
     if (err) {
       return res.status(500).json({ error: 'Internal error occurred while writing the image data' });
     }
 
-    res.json({ filename });
+    res.json({ fileName });
   });
 });
 
