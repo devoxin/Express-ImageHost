@@ -11,7 +11,7 @@ const app = express();
 
 /* Config */
 const currDir = __dirname;
-const port = 80;
+const port = 5600;
 
 const supportedFormats = ['png', 'bmp', 'webp', 'gif', 'jpg', 'jpeg'];
 const defaultFormat = 'png';
