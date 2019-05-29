@@ -43,7 +43,7 @@ app.post('/upload', upload.any(), async (req, res) => {
       return res.status(500).json({ error: 'Internal error occurred while writing the image data' });
     }
 
-    res.json({ path });
+    res.json({ filename });
   });
 });
 
